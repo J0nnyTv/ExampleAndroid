@@ -15,6 +15,9 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     public String TAG = "MainActivity";
+    public static EditText email;
+    public static EditText password;
+    public Button send;
 
     private void secondScreenActivity() {
         Intent i = new Intent(this, SecondScreenShot.class);
@@ -27,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate");
 
-        EditText email = findViewById(R.id.email);
-        EditText password = findViewById(R.id.password);
-        Button send = findViewById(R.id.button_enviar);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        send = findViewById(R.id.button_enviar);
 
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
