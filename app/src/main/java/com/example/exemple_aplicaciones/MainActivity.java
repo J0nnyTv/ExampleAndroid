@@ -14,9 +14,12 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    String TAG = "MainActivity";
-    EditText email = findViewById(R.id.email);
-    EditText password = findViewById(R.id.password);
+    public String TAG = "MainActivity";
+
+    private void secondScreenActivity() {
+        Intent i = new Intent(this, SecondScreenShot.class);
+        startActivity(i);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,24 +27,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate");
 
-        /*Button send = findViewById(R.id.button_enviar);
-        send.setOnClickListener(new View.OnClickListener() {public void onClick(View v) {}});*/
-    }
+        EditText email = findViewById(R.id.email);
+        EditText password = findViewById(R.id.password);
+        Button send = findViewById(R.id.button_enviar);
 
-    public void ejecutar_algo (View view){
-        Log.d(TAG, "Botton Clicked");
-        Editable emailText = email.getText();
-        if(emailText.length() == 0){
-            Toast.makeText(getBaseContext(), "Introduce un email!!", Toast.LENGTH_SHORT).show();
-        }
-        else if(password.length() == 0){
-            Toast.makeText(getBaseContext(), "Introduce una contraseña!!", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Toast.makeText(getBaseContext(), "Tu email introducido es: " + emailText, Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(this, SecondScreenShot.class);
-            startActivity(i);
-        }
+        send.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d(TAG, "Botton Clicked");
+                Editable emailText = email.getText();
+                if(emailText.length() == 0){
+                    Toast.makeText(getBaseContext(), "Introduce un email!!", Toast.LENGTH_SHORT).show();
+                }
+                else if(password.length() == 0){
+                    Toast.makeText(getBaseContext(), "Introduce una contraseña!!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getBaseContext(), "Tu email introducido es: " + emailText, Toast.LENGTH_SHORT).show();
+                    secondScreenActivity();
+                }
+            }
+        });
     }
 
     @Override
