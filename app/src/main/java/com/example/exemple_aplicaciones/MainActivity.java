@@ -15,8 +15,8 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     public String TAG = "MainActivity";
-    public static EditText email;
-    public static EditText password;
+    public EditText email;
+    public EditText password;
     public Button send;
 
     private void secondScreenActivity() {
@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate");
+
+        PreferencesProvider.providePreferences().edit().putInt("coins", 10).commit();
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
