@@ -28,7 +28,7 @@ public class SecondScreenShot extends Activity {
         button_inc = findViewById(R.id.button_increment_coin);
 
         texto = findViewById(R.id.textoPrueba);
-        texto.setText("hola este es el email que has introducido: " + "\nY tu contraseña es: " + coins);
+        texto.setText("Tus coins actuales son: " + coins);
 
         button_inc.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
