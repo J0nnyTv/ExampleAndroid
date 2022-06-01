@@ -1,6 +1,7 @@
 package com.example.exemple_aplicaciones;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,11 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public EditText email;
     public EditText password;
     public Button send;
-
-    private void secondScreenActivity() {
-        Intent i = new Intent(this, SecondScreenShot.class);
-        startActivity(i);
-    }
+    public MutableLiveData<String> email_live;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +27,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate");
 
-        PreferencesProvider.providePreferences().edit().putInt("coins", 10).commit();
+        //No va xd
+        //PreferencesProvider.providePreferences().edit().putInt("coins", 10).commit();
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         send = findViewById(R.id.button_enviar);
+        email_live = new MutableLiveData<>();
+        String name = email_live.getValue();  //para poner el email_live
+
+        Editable emailText = email.getText();
+        email_live.setValue(emailText.toString());
+
+        Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show();
 
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d(TAG, "Botton Clicked");
-                Editable emailText = email.getText();
                 if(emailText.length() == 0){
                     Toast.makeText(getBaseContext(), "Introduce un email!!", Toast.LENGTH_SHORT).show();
                 }
@@ -52,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void secondScreenActivity() {
+        Intent i = new Intent(this, SecondScreenShot.class);
+        startActivity(i);
     }
 
     @Override
