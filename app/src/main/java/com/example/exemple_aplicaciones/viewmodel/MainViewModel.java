@@ -7,4 +7,7 @@ public class MainViewModel extends ViewModel {
 
     public MutableLiveData<String> email_live;
 
+    public MainViewModel() {
+        this.email_live = new MutableLiveData<>();
+    }
 }

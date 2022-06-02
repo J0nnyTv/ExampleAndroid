@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate");
 
         //--------------------------------------------------------------------------------------------
@@ -67,14 +67,14 @@ public class MainActivity extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d(TAG, "Botton Clicked");
-                if(name.length() == 0){
+                if(model.email_live.getValue().length() == 0){
                     Toast.makeText(getBaseContext(), "Introduce un email!!", Toast.LENGTH_SHORT).show();
                 }
                 else if(password.length() == 0){
                     Toast.makeText(getBaseContext(), "Introduce una contraseña!!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(getBaseContext(), "Tu email introducido es: " + name, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Tu email introducido es: " + model.email_live.getValue(), Toast.LENGTH_SHORT).show();
                     secondScreenActivity();
                 }
             }

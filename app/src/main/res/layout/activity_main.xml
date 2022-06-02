@@ -48,6 +48,12 @@
                 android:layout_height="wrap_content"
                 android:text="Send" />
 
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{mainViewModel.email_live}" />
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
