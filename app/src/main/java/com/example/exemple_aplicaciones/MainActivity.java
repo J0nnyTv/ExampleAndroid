@@ -2,6 +2,7 @@ package com.example.exemple_aplicaciones;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,13 +14,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.exemple_aplicaciones.databinding.ActivityMainBinding;
+import com.example.exemple_aplicaciones.viewmodel.MainViewModel;
+
 public class MainActivity extends AppCompatActivity {
 
     public String TAG = "MainActivity";
     public EditText email;
     public EditText password;
     public Button send;
-    public MutableLiveData<String> email_live;
+
+    public ActivityMainBinding binding;
+    public MainViewModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,31 +33,48 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate");
 
-        //No va xd
-        //PreferencesProvider.providePreferences().edit().putInt("coins", 10).commit();
+        //--------------------------------------------------------------------------------------------
 
-        email = findViewById(R.id.email);
+        // @Jordi: Bind the xml with the activity (ActivityLevelsBinding is auto generated).
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+
+        // Set the Content of the xml to the view
+        setContentView(binding.getRoot());
+
+        // Set the viewModel
+        model = new ViewModelProvider(this).get(MainViewModel.class);
+
+        binding.setMainViewModel(model);
+        binding.setLifecycleOwner(this);
+
+        //--------------------------------------------------------------------------------------------
+
+        PreferencesProvider.init(this);
+
+        int coin = PreferencesProvider.providePreferences().getInt("coins", 0);
+        if (coin == 0){
+            PreferencesProvider.providePreferences().edit().putInt("coins", 10).commit();
+        }
+
+        //--------------------------------------------------------------------------------------------
+
         password = findViewById(R.id.password);
         send = findViewById(R.id.button_enviar);
-        email_live = new MutableLiveData<>();
-        String name = email_live.getValue();  //para poner el email_live
 
-        Editable emailText = email.getText();
-        email_live.setValue(emailText.toString());
-
+        String name = model.email_live.getValue();  //para poner el email_live
         Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show();
 
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d(TAG, "Botton Clicked");
-                if(emailText.length() == 0){
+                if(name.length() == 0){
                     Toast.makeText(getBaseContext(), "Introduce un email!!", Toast.LENGTH_SHORT).show();
                 }
                 else if(password.length() == 0){
                     Toast.makeText(getBaseContext(), "Introduce una contraseña!!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(getBaseContext(), "Tu email introducido es: " + emailText, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Tu email introducido es: " + name, Toast.LENGTH_SHORT).show();
                     secondScreenActivity();
                 }
             }

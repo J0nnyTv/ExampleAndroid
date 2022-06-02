@@ -17,6 +17,7 @@ public class SecondScreenShot extends Activity {
     public TextView texto;
     public Button settings;
     public Button button_inc;
+    public  int coins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,23 +25,29 @@ public class SecondScreenShot extends Activity {
         setContentView(R.layout.second_screen);
         Log.d(TAG, "onCreate");
 
-        int coins = PreferencesProvider.providePreferences().getInt("coins", 0);
+        coins = PreferencesProvider.providePreferences().getInt("coins", 0);
         button_inc = findViewById(R.id.button_increment_coin);
+
+        settings = findViewById(R.id.button_opciones);
 
         texto = findViewById(R.id.textoPrueba);
         texto.setText("Tus coins actuales son: " + coins);
 
         button_inc.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Log.d(TAG,"Coins -> " + String.valueOf(coins));
                 PreferencesProvider.providePreferences().edit().putInt("coins", coins + 1).commit();
+                coins = PreferencesProvider.providePreferences().getInt("coins", 0);
+                Log.d(TAG,"Money -> " + String.valueOf(coins));
+                texto.setText("Tus coins actuales son: " + String.valueOf(coins));
             }
         });
 
-        settings.setOnClickListener(new View.OnClickListener() {
+        /*settings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 SettingsFragment settingsFragment = new SettingsFragment();
 
             }
-        });
+        });*/
     }
 }

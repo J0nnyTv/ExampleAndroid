@@ -12,7 +12,7 @@
         android:layout_height="575dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_opciones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Opciones" />
