@@ -25,7 +25,6 @@ import com.example.exemple_aplicaciones.viewmodel.SecondViewModel;
 public class SecondScreenShot extends AppCompatActivity  {
 
     public String TAG = "SecondScreen";
-    public TextView texto;
     public Button settings;
     public Button button_inc;
     public  int coins;
@@ -70,8 +69,7 @@ public class SecondScreenShot extends AppCompatActivity  {
 
         settings = findViewById(R.id.button_opciones);
 
-        texto = findViewById(R.id.textoPrueba);
-        texto.setText("Tus coins actuales son: " + coins);
+        model.text_live.setValue("Tus coins actuales son: " + String.valueOf(coins));
 
         button_inc.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -79,7 +77,7 @@ public class SecondScreenShot extends AppCompatActivity  {
                 PreferencesProvider.providePreferences().edit().putInt("coins", coins + 1).commit();
                 coins = PreferencesProvider.providePreferences().getInt("coins", 0);
                 Log.d(TAG,"Money -> " + String.valueOf(coins));
-                texto.setText("Tus coins actuales son: " + String.valueOf(coins));
+                model.text_live.setValue("Tus coins actuales son: " + String.valueOf(coins));
             }
         });
 
