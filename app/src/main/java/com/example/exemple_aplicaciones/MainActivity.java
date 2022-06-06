@@ -20,12 +20,13 @@ import com.example.exemple_aplicaciones.viewmodel.MainViewModel;
 public class MainActivity extends AppCompatActivity {
 
     public String TAG = "MainActivity";
-    public EditText email;
     public EditText password;
     public Button send;
 
+    //------------------------------------
     public ActivityMainBinding binding;
     public MainViewModel model;
+    //------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
