@@ -26,7 +26,7 @@ public class SecondScreenShot extends Activity {
     public  int coins;
 
     //------------------------------------
-    //public ActivityMainBinding binding;     // Se debe de poner el Binding del secondScreen
+    public ActivityMainBinding binding;     // Se debe de poner el Binding del secondScreen
     public SecondViewModel model;
     //------------------------------------
 
@@ -45,7 +45,7 @@ public class SecondScreenShot extends Activity {
         setContentView(binding.getRoot());
 
         // Set the viewModel
-        model = new ViewModelProvider(this).get(SecondViewModel.class);
+        model = new ViewModelProvider(this).get(MainViewModel.class);
 
         binding.setMainViewModel(model);
         binding.setLifecycleOwner(this);
