@@ -45,7 +45,7 @@ public class SecondScreenShot extends Activity {
         setContentView(binding.getRoot());
 
         // Set the viewModel
-        model = new ViewModelProvider(this).get(MainViewModel.class);
+        model = new ViewModelProvider(this).get(SecondViewModel.class);
 
         binding.setMainViewModel(model);
         binding.setLifecycleOwner(this);
